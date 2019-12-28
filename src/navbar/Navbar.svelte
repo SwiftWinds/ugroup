@@ -24,7 +24,9 @@
 <TopAppBar variant="static" class="demo-top-app-bar mdc-elevation--z4">
   <Row>
     <Section align="start" toolbar>
-      <Title href="/" class="mdc-theme--primary">μGroup</Title>
+      <div class="title">
+        <Title href="/" class="mdc-theme--primary">μGroup</Title>
+      </div>
     </Section>
     <div class="center">
       <Section toolbar>
