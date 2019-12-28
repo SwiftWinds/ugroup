@@ -1,4 +1,5 @@
 import { writable } from 'svelte/store';
+import { firestore } from '../firebase';
 
 const groups = writable([
   [
