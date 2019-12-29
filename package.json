@@ -7,6 +7,11 @@
     "dev": "rollup -c -w",
     "start": "sirv public"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/uGroupMe/ugroup.git"
+  },
+  "license": "MIT",
   "devDependencies": {
     "@mdi/js": "^4.7.95",
     "@smui/button": "^1.0.0-beta.19",
