@@ -4,6 +4,7 @@ import firebase from 'firebase/app';
 import { authState } from 'rxfire/auth';
 import { collectionData } from 'rxfire/firestore';
 import { filter } from 'rxjs/operators';
+
 const app = firebase.initializeApp({
   /* Place your configuration here */
 });
