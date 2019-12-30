@@ -30,8 +30,10 @@
       email,
       emailVerified,
       phoneNumber,
+      password,
       displayName,
       photoURL,
+      disabled,
     } = result.user;
     await firestore
       .collection('users')
