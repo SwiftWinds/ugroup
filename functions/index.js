@@ -16,16 +16,24 @@ exports.createUser = functions.firestore
   .document('users/{userId}')
   .onCreate((snap, context) => {
     // Object representing the document
-    const user = snap.data();
+    const {
+      email,
+      emailVerified,
+      phoneNumber,
+      displayName,
+      photoURL,
+    } = snap.data();
 
     // Create auth() account for corresponding user doc in firestore
     admin
       .auth()
       .createUser({
-        email: user.email,
-        password: user.password,
-        displayName: user.name,
         uid: context.params.userId,
+        email,
+        emailVerified,
+        phoneNumber,
+        displayName,
+        photoURL,
       })
       .then((userRecord) => {
         console.log('Successfully created new user:', userRecord.uid);

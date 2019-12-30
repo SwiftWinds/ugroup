@@ -11,7 +11,7 @@
   import IconButton from '@smui/icon-button';
   import { Icon } from '@smui/common';
 
-  import firebase, { app, loggedIn } from '../firebase.js';
+  import firebase, { firestore, app, loggedIn } from '../firebase.js';
 
   import {
     mdiUndo,
@@ -32,7 +32,6 @@
       phoneNumber,
       displayName,
       photoURL,
-      disabled,
     } = result.user;
     await firestore
       .collection('users')
@@ -43,11 +42,8 @@
         phoneNumber,
         displayName,
         photoURL,
-        disabled,
-        students: [],
-        history: [],
-        forbiddenPairs: []
       });
+    console.log(`we did it! firestore: ${firestore}, uid: ${uid}`);
   };
 
   const logout = async () => {
@@ -102,7 +98,7 @@
           </svg>
         </Icon>
       </IconButton>
-      <IconButton on:click="{$loggedIn ? logout : login}">
+      <IconButton style="margin:0" on:click="{$loggedIn ? logout : login}">
         <Icon>
           <svg style="width:24px;height:24px" viewBox="0 0 24 24">
             <path fill="#FFFFFF" d="{mdiPower}"></path>
