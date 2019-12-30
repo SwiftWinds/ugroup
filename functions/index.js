@@ -7,6 +7,10 @@ const admin = require('firebase-admin');
 
 const serviceAccount = require('./serviceAccountKey.json');
 
+const pick = require('object.pick');
+
+const cleanDeep = require('clean-deep');
+
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
   databaseURL: 'https://ugroup-me.firebaseio.com',
@@ -16,24 +20,22 @@ exports.createUser = functions.firestore
   .document('users/{userId}')
   .onCreate((snap, context) => {
     // Object representing the document
-    const {
-      email,
-      emailVerified,
-      phoneNumber,
-      displayName,
-      photoURL,
-    } = snap.data();
+    const userProps = cleanDeep(
+      pick(snap.data(), [
+        'email',
+        'emailVerified',
+        'phoneNumber',
+        'displayName',
+        'photoURL',
+      ])
+    );
 
     // Create auth() account for corresponding user doc in firestore
     admin
       .auth()
       .createUser({
         uid: context.params.userId,
-        email,
-        emailVerified,
-        phoneNumber,
-        displayName,
-        photoURL,
+        ...userProps,
       })
       .then((userRecord) => {
         console.log('Successfully created new user:', userRecord.uid);
