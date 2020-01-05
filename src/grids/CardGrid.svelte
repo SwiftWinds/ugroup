@@ -1,12 +1,6 @@
-<style>
-  .grid {
-    display: grid;
-  }
-
-  slot {
-    
-  }
-</style>
+<script>
+  import './CardGrid.scss';
+</script>
 
 <section class="grid">
   <slot />
